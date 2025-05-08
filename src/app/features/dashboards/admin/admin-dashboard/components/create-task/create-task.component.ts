@@ -29,6 +29,7 @@ export class CreateTaskComponent implements OnInit {
     startDate: new FormControl<string>('', [Validators.required]),
     endDate: new FormControl<string>('', [Validators.required]),
     category: new FormControl<string>('', [Validators.required]),
+    description: new FormControl<string>('', [Validators.required, Validators.minLength(20)])
   })
 
   constructor(
@@ -39,11 +40,10 @@ export class CreateTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.fetchCategory();
+    this.fetchCategory();
   }
 
   fetchCategory(): void {
-
     this.preloader = true;
 
     const subUrl = '/api/categories';
@@ -53,36 +53,24 @@ export class CreateTaskComponent implements OnInit {
         next: value => {
           this.categories = value;
         },
+        error: err => {
+          this.preloader = false;
+          console.log('Error fetching categories', err);
+        },
         complete: () => {
-
           this.preloader = false;
         },
-        error: err => {
-
-          console.log('Error fetching categories', err);
-          this.preloader = false;
-        }
       })
+
+    this.preloader = false;
 
   }
 
   create() {
-
     const catId = this.createTaskFormGroup.controls.category.value as string
-    const title = this.createTaskFormGroup.controls.title.value as string;
-    const status = this.createTaskFormGroup.controls.status.value as string;
-    const startDate = this.createTaskFormGroup.controls.startDate.value as string;
-    const endDate = this.createTaskFormGroup.controls.endDate.value as string;
-
     const subUrl = `/api/tasks/${catId}`;
 
-
-    this.httpService.createResource(subUrl, {
-      title,
-      status,
-      startDate,
-      endDate
-    })
+    this.httpService.createResource(subUrl, this.createTaskFormGroup.value)
       .subscribe({
         next: value => {
           this.toastService.showSuccess('Task created successfully');

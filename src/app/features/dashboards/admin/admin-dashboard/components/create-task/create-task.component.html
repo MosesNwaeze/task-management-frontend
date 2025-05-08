@@ -1,4 +1,4 @@
-<div class="container w-1/2 py-2 mx-auto ">
+<div class="container w-1/2  mx-auto ">
 
   <div *ngIf="preloader" class="overlay">
       <span
@@ -11,7 +11,7 @@
   </div>
 
   <form
-    class="flex flex-col gap-5 my-5"
+    class="flex flex-col gap-5"
     ngForm="createCategoryFormGroup"
   >
 
@@ -35,6 +35,26 @@
       </div>
 
     </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Description</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="createTaskFormGroup.controls.description"
+        [errorStateMatcher]="matcher"
+        placeholder="Task title"
+      >
+
+      <div *ngIf="createTaskFormGroup.get('description')?.touched && createTaskFormGroup.get('description')?.invalid">
+        <small *ngIf="createTaskFormGroup.get('description')?.errors?.['required']">Description is required</small>
+        <small *ngIf="createTaskFormGroup.get('description')?.errors?.['minlength']">
+          Minimum 20 characters
+        </small>
+      </div>
+
+    </mat-form-field>
+
 
     <mat-form-field class="">
       <mat-label>Status</mat-label>
