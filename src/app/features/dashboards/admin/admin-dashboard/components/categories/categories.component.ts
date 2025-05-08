@@ -50,8 +50,6 @@ export class CategoriesComponent implements OnInit {
           this.categories = new MatTableDataSource<any>(value)
           this.categories.paginator = this.paginator
           this.categories.sort = this.sort
-          console.log(value, '<><><>');
-
         },
         error: err => {
           console.log('Error fetching categories', err);
@@ -77,6 +75,7 @@ export class CategoriesComponent implements OnInit {
 
   remove(element: any): void {
 
+    this.preloader = true;
     const subUrl = `/api/categories/${element.id}`;
 
     this.httpService.deleteResource(subUrl)
@@ -87,9 +86,11 @@ export class CategoriesComponent implements OnInit {
         error: err => {
           console.log('Error deleting categories', err);
           this.toastService.showError('Error deleting categories');
+          this.preloader = false;
         },
         complete: () => {
           this.fetchCategories();
+          this.preloader = false
         }
       })
 
