@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import {ICategoryType} from "../../../../../../types/i-category-type";
 import {HttpService} from "../../../../../../shared/services/http.service";
 import {Router} from "@angular/router";
@@ -6,6 +6,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {ToastService} from "../../../../../../shared/services/toast.service";
+import {UpdateCategoryComponent} from "../update-category/update-category.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-categories',
@@ -17,6 +19,8 @@ export class CategoriesComponent implements OnInit {
   preloader = false;
 
   displayedColumns = ['sn', 'name', 'description', 'created-by', 'edit', 'delete'];
+
+  readonly dialog = inject(MatDialog);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -92,6 +96,16 @@ export class CategoriesComponent implements OnInit {
   }
 
   update(element: any): void {
+
+    const dialogRef = this.dialog.open(UpdateCategoryComponent, {
+      data: {
+        data: element
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.fetchCategories();
+    });
 
   }
 

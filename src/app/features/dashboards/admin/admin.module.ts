@@ -31,6 +31,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatDividerModule} from "@angular/material/divider";
 import { LogTimeComponent } from './admin-dashboard/components/log-time/log-time.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { UpdateCategoryComponent } from './admin-dashboard/components/update-category/update-category.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     ReportsComponent,
     CreateCategoriesComponent,
     TaskUpdateComponent,
-    LogTimeComponent
+    LogTimeComponent,
+    UpdateCategoryComponent
   ],
   imports: [
     CommonModule,

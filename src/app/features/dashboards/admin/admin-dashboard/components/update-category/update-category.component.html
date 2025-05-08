@@ -1,0 +1,78 @@
+<div class="container flex justify-center items-center h-full">
+
+  <div *ngIf="preloader" class="overlay">
+      <span
+        aria-hidden="true"
+        class="spinner-border spinner-border-xl text-primary preloader"
+        role="status"
+      >
+      </span>
+
+  </div>
+
+  <div class="w-[600px] h-full">
+
+    <form
+      class="flex flex-col gap-5"
+      ngForm="loginFormGroup"
+      (ngSubmit)="updateCategory()"
+    >
+
+      <h1>Update Category</h1>
+
+      <mat-form-field class="">
+        <mat-label>Name</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="cateUpdateFormGroup.controls.name"
+          [errorStateMatcher]="matcher"
+          placeholder="Category Name"
+        >
+        <div *ngIf="cateUpdateFormGroup.get('name')?.touched && cateUpdateFormGroup.get('name')?.invalid">
+          <small *ngIf="cateUpdateFormGroup.get('name')?.errors?.['required']">
+            <mat-error>Name is required</mat-error>
+          </small>
+          <small *ngIf="cateUpdateFormGroup.get('name')?.errors?.['minlength']">
+            <mat-error>Minimum 5 characters</mat-error>
+          </small>
+        </div>
+
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <mat-label>Description</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="cateUpdateFormGroup.controls.description"
+          [errorStateMatcher]="matcher"
+          placeholder="categry Description"
+        >
+        <div *ngIf="cateUpdateFormGroup.get('description')?.touched && cateUpdateFormGroup.get('description')?.invalid">
+          <small *ngIf="cateUpdateFormGroup.get('description')?.errors?.['required']">
+            <mat-error>Description is required</mat-error>
+          </small>
+          <small *ngIf="cateUpdateFormGroup.get('name')?.errors?.['minlength']">
+            <mat-error>Minimum 10 characters</mat-error>
+          </small>
+        </div>
+
+      </mat-form-field>
+
+
+      <button
+        class="bg-blue-500 text-white px-4 py-3 rounded"
+        type="button"
+        (click)="updateCategory()"
+        [disabled]="cateUpdateFormGroup.invalid"
+      >
+        Update category
+      </button>
+
+    </form>
+
+
+  </div>
+
+</div>
