@@ -1,0 +1,35 @@
+.wrapper-content {
+  background-color: blueviolet;
+  height: 100vh;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.menu-item {
+  font-size: 18px;
+}
+
+.menu-list {
+  padding: 10px;
+}
+
+.active {
+  background-color: aqua;
+  border-radius: 10px;
+  color: black;
+}
+
+.menu-list:hover {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+}
+
+.section-title {
+  @apply h-1 text-2xl font-extrabold;
+  color: black;
+}
+

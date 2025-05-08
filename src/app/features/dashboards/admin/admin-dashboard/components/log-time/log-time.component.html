@@ -1,0 +1,53 @@
+<div class="container mx-auto">
+
+
+  <form
+    class="flex flex-col gap-5"
+    ngForm="logTimeFormGroup"
+    (ngSubmit)="logTime()"
+  >
+
+    <div class="w-full flex justify-between">
+
+      <div></div>
+
+      <button
+        class="bg-red-500 text-white p-2 rounded"
+        type="button"
+        (click)="dialogRef.close()"
+      >
+        X
+      </button>
+
+    </div>
+
+    <mat-form-field class="">
+      <mat-label>Time Spent</mat-label>
+      <input
+        type="email"
+        matInput
+        [formControl]="logTimeFormGroup.controls.timeSpent"
+        [errorStateMatcher]="matcher"
+        placeholder="1h 3m"
+      >
+      <div *ngIf="logTimeFormGroup.get('timeSpent')?.touched && logTimeFormGroup.get('timeSpent')?.invalid">
+        <small *ngIf="logTimeFormGroup.get('timeSpent')?.errors?.['timeSpent']">
+          <mat-error>Time spent is invalid</mat-error>
+        </small>
+      </div>
+
+    </mat-form-field>
+
+    <button
+      class="bg-blue-500 text-white px-4 py-3 rounded"
+      type="button"
+      (click)="logTime()"
+      [disabled]="logTimeFormGroup.invalid"
+    >
+      Log Time
+    </button>
+
+  </form>
+
+
+</div>

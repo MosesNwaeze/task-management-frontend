@@ -1,0 +1,117 @@
+<div class="container flex justify-center items-center h-full">
+
+  <div *ngIf="preloader" class="overlay">
+      <span
+        aria-hidden="true"
+        class="spinner-border spinner-border-xl text-primary preloader"
+        role="status"
+      >
+      </span>
+
+  </div>
+
+  <div class="w-[600px] h-full">
+
+    <form
+      class="flex flex-col gap-5"
+      ngForm="loginFormGroup"
+      (ngSubmit)="updateTask()"
+    >
+
+      <h1>Update Task</h1>
+
+      <mat-form-field class="">
+        <mat-label>Title</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="taskUpdateFormGroup.controls.title"
+          [errorStateMatcher]="matcher"
+          placeholder="Task title"
+        >
+        <div *ngIf="taskUpdateFormGroup.get('title')?.touched && taskUpdateFormGroup.get('title')?.invalid">
+          <small *ngIf="taskUpdateFormGroup.get('title')?.errors?.['required']">
+            <mat-error>Title is required</mat-error>
+          </small>
+          <small *ngIf="taskUpdateFormGroup.get('name')?.errors?.['minlength']">
+            <mat-error>Minimum 10 characters</mat-error>
+          </small>
+        </div>
+
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <mat-label>Description</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="taskUpdateFormGroup.controls.description"
+          [errorStateMatcher]="matcher"
+          placeholder="Task Description"
+        >
+        <div *ngIf="taskUpdateFormGroup.get('description')?.touched && taskUpdateFormGroup.get('description')?.invalid">
+          <small *ngIf="taskUpdateFormGroup.get('description')?.errors?.['required']">
+            <mat-error>Description is required</mat-error>
+          </small>
+          <small *ngIf="taskUpdateFormGroup.get('name')?.errors?.['minlength']">
+            <mat-error>Minimum 20 characters</mat-error>
+          </small>
+        </div>
+
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <mat-form-field>
+          <mat-label>Start date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [formControl]="taskUpdateFormGroup.controls.startDate"
+            [errorStateMatcher]="matcher"
+          >
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <div *ngIf="taskUpdateFormGroup.get('startDate')?.touched && taskUpdateFormGroup.get('startDate')?.invalid">
+          <small *ngIf="taskUpdateFormGroup.get('startDate')?.errors?.['required']">Start date is required</small>
+        </div>
+
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <mat-form-field>
+          <mat-label>End date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            [formControl]="taskUpdateFormGroup.controls.endDate"
+            [errorStateMatcher]="matcher"
+          >
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <div *ngIf="taskUpdateFormGroup.get('endDate')?.touched && taskUpdateFormGroup.get('endDate')?.invalid">
+          <small *ngIf="taskUpdateFormGroup.get('endDate')?.errors?.['required']">End date is required</small>
+        </div>
+
+      </mat-form-field>
+
+      <button
+        class="bg-blue-500 text-white px-4 py-3 rounded"
+        type="button"
+        (click)="updateTask()"
+        [disabled]="taskUpdateFormGroup.invalid"
+      >
+        Update Task
+      </button>
+
+    </form>
+
+
+  </div>
+
+</div>

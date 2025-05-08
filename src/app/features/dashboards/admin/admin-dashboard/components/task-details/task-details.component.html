@@ -1,0 +1,144 @@
+<div class="container my-10">
+
+
+  <div *ngIf="preloader" class="overlay">
+      <span
+        aria-hidden="true"
+        class="spinner-border spinner-border-xl text-primary preloader"
+        role="status"
+      >
+      </span>
+
+  </div>
+
+  <div class="flex flex-col gap-5">
+
+
+    <div class="flex gap-5 w-[100%]">
+
+      <mat-card appearance="outlined" class="w-1/2">
+        <mat-card-content>
+          <div class="flex justify-between">
+
+            <div>
+              <h1 class=" text-center text-4xl text-blue-500"> Task Details</h1>
+            </div>
+
+
+            <mat-form-field appearance="fill" class="w-1/2">
+              <mat-label>Task Status</mat-label>
+              <mat-select
+                [value]="task?.status"
+                (selectionChange)="changeStatus($event)"
+                class="w-1/2"
+              >
+                <mat-option>Select Status</mat-option>
+                <mat-option [value]="s" *ngFor="let s of status">{{ s }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <dl class="flex flex-col gap-4">
+            <div>
+              <dt class="text-[20px]">Title:</dt>
+              <dd class="text-green-500 font-extrabold">{{ task?.title }}</dd>
+              <mat-divider></mat-divider>
+            </div>
+
+            <div>
+              <dt class="text-[20px]">Task description:</dt>
+              <dd class="text-green-500 font-extrabold">{{ task?.description }}</dd>
+              <mat-divider></mat-divider>
+            </div>
+
+            <div>
+              <dt class="text-[20px]">Task status:</dt>
+              <dd class="text-green-500 font-extrabold">{{ task?.status }}</dd>
+              <mat-divider></mat-divider>
+            </div>
+
+            <div>
+              <dt class="text-[20px]">Start Date:</dt>
+              <dd class="text-green-500 font-extrabold">{{ task?.startDate | date }}</dd>
+              <mat-divider></mat-divider>
+            </div>
+
+
+            <div>
+              <dt class="text-[20px]">End date:</dt>
+              <dd class="text-green-500 font-extrabold">{{ task?.endDate | date }}</dd>
+              <mat-divider></mat-divider>
+            </div>
+
+            <div>
+              <dt class="text-[20px]">Assigned to:</dt>
+              <dd class="text-green-500 font-extrabold">{{ task?.assignee?.name }}</dd>
+              <mat-divider></mat-divider>
+
+            </div>
+
+            <div>
+              <dt class="text-[20px]">Task Category:</dt>
+              <dd class="text-green-500 font-extrabold">{{ task?.taskCategory?.name }}</dd>
+            </div>
+
+          </dl>
+
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined" class="w-1/2">
+        <mat-card-content>Simple card</mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <mat-card appearance="outlined">
+      <mat-card-content>
+
+        <button
+          class="add-button float-end"
+          type="button"
+          (click)="openDialog()"
+        >
+          Log Time
+        </button>
+
+        <table mat-table [dataSource]="dataSource" class="w-full">
+
+          <ng-container matColumnDef="sn">
+            <th mat-header-cell *matHeaderCellDef> S/N</th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="date-logged">
+            <th mat-header-cell *matHeaderCellDef> Date Logged</th>
+            <td mat-cell *matCellDef="let element"> {{ element.dateLogged | date }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="time-spent">
+            <th mat-header-cell *matHeaderCellDef>Time Spent</th>
+            <td mat-cell *matCellDef="let element"> {{ element.timeSpent }} minutes</td>
+          </ng-container>
+
+          <ng-container matColumnDef="task-name">
+            <th mat-header-cell *matHeaderCellDef> Task Name</th>
+            <td mat-cell *matCellDef="let element"> {{ element.tasks.title }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="created-by">
+            <th mat-header-cell *matHeaderCellDef>Created By</th>
+            <td mat-cell *matCellDef="let element"> {{ element.user.name }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[3,6, 12]"></mat-paginator>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+
+</div>

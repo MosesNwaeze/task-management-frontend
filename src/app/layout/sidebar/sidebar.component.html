@@ -1,0 +1,99 @@
+<section class="wrapper-content">
+
+  <h1 class="section-title">Activities</h1>
+
+  <ul class="list-none flex flex-col gap-8 text-white mt-10">
+    <li
+      class="menu-list"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <a
+        routerLink="/dashboard/report"
+        class="menu-item"
+      >
+        <span class="flex gap-2">
+          <mat-icon class="">home</mat-icon>
+          <span class="mt-1">Dashboard</span>
+        </span>
+      </a>
+    </li>
+    <li
+      class="menu-list"
+      routerLinkActive="active"
+    >
+      <a
+        routerLink="/dashboard/task/assigned"
+        class="menu-item"
+      >
+        <span class="flex gap-2">
+          <mat-icon>score</mat-icon>
+          <span class="mt-1">My Tasks</span>
+        </span>
+      </a>
+    </li>
+    <li
+      class="menu-list"
+      routerLinkActive="active"
+    >
+      <a
+        routerLink="/dashboard/tasks"
+        class="menu-item"
+      >
+      <span class="flex gap-2">
+      <mat-icon>create_new_folder</mat-icon>
+          <span class="mt-1">All Task</span>
+        </span>
+      </a>
+    </li>
+    <li
+      class="menu-list"
+      routerLinkActive="active"
+      [ngClass]="{'hidden': authService.getRole() !== 'ADMIN'}"
+    >
+      <a
+        routerLink="/dashboard/categories"
+        class="menu-item"
+      >
+      <span class="flex gap-2">
+        <mat-icon>folder</mat-icon>
+          <span class="mt-1">Categories</span>
+        </span>
+
+      </a>
+    </li>
+    <li
+      class="menu-list"
+      routerLinkActive="active"
+    >
+      <a
+        routerLink="/dashboard/logging"
+        class="menu-item"
+        routerLinkActive="active"
+      >
+         <span class="flex gap-2">
+        <mat-icon>track_changes</mat-icon>
+          <span class="mt-1">Time Logging</span>
+        </span>
+      </a>
+    </li>
+
+    <li
+      class="menu-list"
+      routerLinkActive="active"
+    >
+      <a
+        class="menu-item"
+        routerLinkActive="active"
+        (click)="logout()"
+        routerLink="#"
+      >
+         <span class="flex gap-2">
+        <mat-icon>power_settings_new</mat-icon>
+          <span class="mt-1">Logout</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+
+</section>

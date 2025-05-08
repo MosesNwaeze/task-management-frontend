@@ -1,0 +1,4 @@
+.main-wrapper {
+  @apply container;
+  margin: 5rem 0;
+}

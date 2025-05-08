@@ -1,0 +1,47 @@
+@import '../node_modules/ngx-toastr/toastr.css'; /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#toast-container {
+  top: 1em !important;
+  right: 1em !important;
+  bottom: auto !important;
+  left: auto !important;
+}
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.preloader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.add-button {
+  @apply p-2 text-white bg-blue-900;
+  border-radius: 10px;
+}
+
+

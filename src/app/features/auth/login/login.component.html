@@ -1,0 +1,75 @@
+<div class="container flex justify-center items-center h-full">
+
+  <div class="w-[600px] h-[400px]">
+
+    <form
+      class="flex flex-col gap-5"
+      ngForm="loginFormGroup"
+      (ngSubmit)="login()"
+    >
+
+      <h1>Login Form</h1>
+
+      <mat-form-field class="">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          [formControl]="loginFormGroup.controls.email"
+          [errorStateMatcher]="matcher"
+          placeholder="user@gmail.com"
+        >
+        <div *ngIf="loginFormGroup.get('email')?.touched && loginFormGroup.get('email')?.invalid">
+          <small *ngIf="loginFormGroup.get('email')?.errors?.['required']">
+            <mat-error>Email is required</mat-error>
+          </small>
+          <small *ngIf="loginFormGroup.get('email')?.errors?.['email']">
+            <mat-error>Invalid email</mat-error>
+          </small>
+        </div>
+
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          matInput
+          [formControl]="loginFormGroup.controls.password"
+          [errorStateMatcher]="matcher"
+          placeholder="Password123!"
+        >
+        <div *ngIf="loginFormGroup.get('password')?.touched && loginFormGroup.get('password')?.invalid">
+          <small *ngIf="loginFormGroup.get('password')?.errors?.['required']">
+            <mat-error>Password is required</mat-error>
+          </small>
+          <small *ngIf="loginFormGroup.get('password')?.errors?.['minlength']">
+            <mat-error>Minimum 6 characters</mat-error>
+          </small>
+        </div>
+      </mat-form-field>
+
+      <div class="my-2 flex gap-2 justify-center w-full">
+        <span class="mt-1">New?
+        </span><a class="decoration-0 text-yellow-500 text-xl"
+                                          routerLink="/auth/register">
+        register
+      </a>
+      </div>
+
+      <button
+        class="bg-blue-500 text-white px-4 py-3 rounded"
+        type="button"
+        (click)="login()"
+        [disabled]="loginFormGroup.invalid"
+      >
+        Login
+      </button>
+
+
+    </form>
+
+
+  </div>
+
+</div>

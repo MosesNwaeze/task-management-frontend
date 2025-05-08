@@ -1,0 +1,134 @@
+<div class="container w-1/2 py-2 mx-auto ">
+
+  <div *ngIf="preloader" class="overlay">
+      <span
+        aria-hidden="true"
+        class="spinner-border spinner-border-xl text-primary preloader"
+        role="status"
+      >
+      </span>
+
+  </div>
+
+  <form
+    class="flex flex-col gap-5 my-5"
+    ngForm="createCategoryFormGroup"
+  >
+
+    <h1>Create Task Form</h1>
+
+    <mat-form-field class="">
+      <mat-label>Title</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="createTaskFormGroup.controls.title"
+        [errorStateMatcher]="matcher"
+        placeholder="Task title"
+      >
+
+      <div *ngIf="createTaskFormGroup.get('title')?.touched && createTaskFormGroup.get('title')?.invalid">
+        <small *ngIf="createTaskFormGroup.get('title')?.errors?.['required']">Title is required</small>
+        <small *ngIf="createTaskFormGroup.get('title')?.errors?.['minlength']">
+          Minimum 10 characters
+        </small>
+      </div>
+
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Status</mat-label>
+
+      <mat-select
+        [formControl]="createTaskFormGroup.controls.status"
+        [errorStateMatcher]="matcher"
+        placeholder="SELECT STATUS"
+      >
+        <mat-option *ngFor="let status of statusEnum" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+      <div
+        *ngIf="createTaskFormGroup.get('status')?.touched && createTaskFormGroup.get('status')?.invalid">
+        <small *ngIf="createTaskFormGroup.get('status')?.errors?.['required']">Status is required</small>
+        <small *ngIf="createTaskFormGroup.get('status')?.errors?.['minlength']">
+          Minimum 4 characters
+        </small>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="">
+      <mat-label>Task Category</mat-label>
+
+      <mat-select
+        [formControl]="createTaskFormGroup.controls.category"
+        [errorStateMatcher]="matcher"
+        placeholder="SELECT TASK CATEGORY"
+      >
+        <mat-option value="">
+          SELECT CATEGORY
+        </mat-option>
+        <mat-option *ngFor="let cat of categories" [value]="cat.id">
+          {{ cat.name }}
+        </mat-option>
+      </mat-select>
+      <div
+        *ngIf="createTaskFormGroup.get('category')?.touched && createTaskFormGroup.get('category')?.invalid">
+        <small *ngIf="createTaskFormGroup.get('category')?.errors?.['required']">Category is required</small>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-form-field>
+        <mat-label>Start date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [formControl]="createTaskFormGroup.controls.startDate"
+          [errorStateMatcher]="matcher"
+        >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div *ngIf="createTaskFormGroup.get('startDate')?.touched && createTaskFormGroup.get('startDate')?.invalid">
+        <small *ngIf="createTaskFormGroup.get('startDate')?.errors?.['required']">Start date is required</small>
+      </div>
+
+    </mat-form-field>
+
+    <mat-form-field class="">
+
+      <mat-form-field>
+        <mat-label>End date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          [formControl]="createTaskFormGroup.controls.endDate"
+          [errorStateMatcher]="matcher"
+        >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <div *ngIf="createTaskFormGroup.get('endDate')?.touched && createTaskFormGroup.get('endDate')?.invalid">
+        <small *ngIf="createTaskFormGroup.get('endDate')?.errors?.['required']">End date is required</small>
+      </div>
+
+    </mat-form-field>
+
+
+    <button
+      class="bg-blue-500 text-white px-4 py-3 rounded"
+      type="button"
+      (click)="create()"
+      [disabled]="createTaskFormGroup.invalid"
+    >
+      Create Task
+    </button>
+
+  </form>
+
+
+</div>

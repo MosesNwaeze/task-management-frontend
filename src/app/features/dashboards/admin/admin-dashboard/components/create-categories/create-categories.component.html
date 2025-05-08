@@ -1,0 +1,61 @@
+<div class="container w-1/2 py-6 mx-auto ">
+
+  <form
+    class="flex flex-col gap-5 my-10"
+    ngForm="createCategoryFormGroup"
+  >
+
+    <h1>Create Category Form</h1>
+
+    <mat-form-field class="">
+      <mat-label>Name</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="createCategoryFormGroup.controls.name"
+        [errorStateMatcher]="matcher"
+        placeholder="Category name"
+      >
+
+      <div *ngIf="createCategoryFormGroup.get('name')?.touched && createCategoryFormGroup.get('name')?.invalid">
+        <small *ngIf="createCategoryFormGroup.get('name')?.errors?.['required']">Description is required</small>
+        <small *ngIf="createCategoryFormGroup.get('name')?.errors?.['minlength']">
+          Minimum 10 characters
+        </small>
+      </div>
+
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        [formControl]="createCategoryFormGroup.controls.description"
+        [errorStateMatcher]="matcher"
+        placeholder="Description of the category"
+        rows="5"
+      >
+
+        </textarea>
+      <div
+        *ngIf="createCategoryFormGroup.get('description')?.touched && createCategoryFormGroup.get('description')?.invalid">
+        <small *ngIf="createCategoryFormGroup.get('description')?.errors?.['required']">Description is required</small>
+        <small *ngIf="createCategoryFormGroup.get('description')?.errors?.['minlength']">
+          Minimum 20 characters
+        </small>
+      </div>
+    </mat-form-field>
+
+    <button
+      class="bg-blue-500 text-white px-4 py-3 rounded"
+      type="button"
+      (click)="create()"
+      [disabled]="createCategoryFormGroup.invalid"
+    >
+      Create Category
+    </button>
+
+  </form>
+
+
+</div>
