@@ -1,4 +1,4 @@
-<div class="container p-5 mx-auto">
+<div class="container py-10 mx-auto">
 
   <div *ngIf="preloader" class="overlay">
       <span
@@ -42,8 +42,10 @@
             type="button"
             (click)="updateUser(element)"
           >
-            <mat-icon>edit</mat-icon>
-            Update
+            <div class="flex space-x-1">
+              <mat-icon class="">edit</mat-icon>
+              <span class="mt-1">Update</span>
+            </div>
           </button>
 
           <button
@@ -51,8 +53,11 @@
             type="button"
             (click)="removeUser(element)"
           >
-            <mat-icon>delete</mat-icon>
-            Delete
+
+            <div class="flex space-x-1">
+              <mat-icon class="">delete</mat-icon>
+              <span class="mt-1">Delete</span>
+            </div>
           </button>
 
         </div>

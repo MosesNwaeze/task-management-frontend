@@ -19,7 +19,16 @@
       (ngSubmit)="updateUser()"
     >
 
-      <h1>Update Form</h1>
+      <div class="flex justify-between">
+        <h1>Update Form</h1>
+        <button
+          type="button"
+          class="close-dialog"
+          (click)="dialogRef.close()"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
 
       <mat-form-field class="">
         <mat-label>Name</mat-label>

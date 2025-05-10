@@ -6,13 +6,21 @@
   display: grid;
   grid-template-columns: 0.5fr 2fr;
   width: 100%;
+  position: relative;
 }
 
 .main-content {
   height: 100vh;
   padding: 0 4rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 85%
 }
 
 .sidebar {
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15%
 }
